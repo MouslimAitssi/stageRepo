@@ -20,7 +20,7 @@ world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 cities.head()
 data = pd.read_csv('stopWords.csv', low_memory=False, encoding='utf-8')
 stopwords = data.loc[:,"stop_words"].tolist()
-#print(stopwords)
+
 def get_stop_words():
     with open('stop.txt', 'r') as f:
         stopwords = f.readlines()
@@ -37,7 +37,6 @@ def plotCountryPatch(axes, country_name, fcolor):
 
 def plot_show(s):
 	artic = pd.DataFrame(data = s)
-	#freq=list(articles.groupby('country').count())
 	SS=[list(artic.groupby('country')['country'].transform('count')), artic['country'].tolist()]
 	keys = SS[1]
 	values = SS[0]
@@ -66,10 +65,8 @@ def home(window):
 	canvas.create_image(width/2, height/2, image = image)
 	canvas.pack(expand = YES)
 	frame = Frame(window, bg = "black")
-
 	label_title = Label(window, text = "Bienvenue sur notre application", font = ("courrier", 30), bg = 'black', fg = "red")
 	label_title.pack(expand = YES)
-
 	b1 = Button(frame, text = "Recherche syntaxique", font = ("courrier", 20), bg = 'gray', fg = 'red', command = partial(recherche_syntaxique, window)).pack(expand = YES, fill = X)
 	b2 = Button(frame, text = "Recherche thematique", font = ("courrier", 20), bg = 'gray', fg = 'red', command = partial(recherche_thematique, window)).pack(expand = YES, fill = X)
 	frame.pack(expand = YES)
